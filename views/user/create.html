@@ -46,33 +46,5 @@
 	</div>
 </div>
 
-<script src="/static/select2/select2.min.js" type="text/javascript"></script>
-<script type="text/javascript">
-$(function() {
-	$("#users").select2({
-        placeholder: "输入要添加组员的name",
-        allowClear: true,
-        multiple: true,
-        quietMillis: 100,
-        minimumInputLength: 1,
-        id: function(obj){return obj.id;},
-        ajax: {
-            url: "/user/query",
-            dataType: 'json',
-            data: function(term, page) {
-                return {
-                    query: term,
-                    limit: 20
-                };
-            },
-            results: function(json, page) {
-                return {results: json.users};
-            }
-        },
-        formatResult: function(obj) {return obj.name + "["+obj.cnname+"]" + "["+obj.email+"]"},
-        formatSelection: function(obj) {return obj.name},
-    });
-});
-</script>
 
 {{template "layout/foot.html" .}}
