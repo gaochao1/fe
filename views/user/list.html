@@ -19,7 +19,7 @@ $(function() {
 
 				<ol class="breadcrumb">
 					<li><a href="/">首页</a></li>
-					<li class="active">通讯录</li>
+					<li class="active">用户</li>
 				</ol>
 
 				<div class="form-inline mb20" role="form">
@@ -31,6 +31,14 @@ $(function() {
 						<span class="glyphicon glyphicon-search"></span>
 						Search
 					</button>
+
+					{{if gt $.Me.Role 0}}
+					<a href="/me/user/c" class="btn btn-default pull-right">
+						<span class="glyphicon glyphicon-plus"></span>
+						Add
+					</a>
+					{{end}}
+
 				</div>
 
 				<div class="us">

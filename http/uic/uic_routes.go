@@ -3,7 +3,7 @@ package uic
 import (
 	"github.com/astaxie/beego"
 	"github.com/astaxie/beego/context"
-	"github.com/open-falcon/fe/http/base"
+	"github.com/gaochao1/fe/http/base"
 )
 
 func ConfigRoutes() {
@@ -37,6 +37,7 @@ func ConfigRoutes() {
 			beego.NSRouter("/profile", &UserController{}, "get:ProfileGet;post:ProfilePost"),
 			beego.NSRouter("/chpwd", &UserController{}, "*:ChangePassword"),
 			beego.NSRouter("/users", &UserController{}, "get:Users"),
+			beego.NSRouter("/user/c", &UserController{}, "get:CreateUserGet;post:CreateUserPost"),
 			beego.NSRouter("/teams", &TeamController{}, "get:Teams"),
 			beego.NSRouter("/team/c", &TeamController{}, "get:CreateTeamGet;post:CreateTeamPost"),
 		)

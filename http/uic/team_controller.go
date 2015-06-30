@@ -1,9 +1,9 @@
 package uic
 
 import (
-	"github.com/open-falcon/fe/http/base"
-	. "github.com/open-falcon/fe/model/uic"
-	"github.com/open-falcon/fe/utils"
+	"github.com/gaochao1/fe/http/base"
+	. "github.com/gaochao1/fe/model/uic"
+	"github.com/gaochao1/fe/utils"
 	"strings"
 )
 
@@ -55,6 +55,12 @@ func (this *TeamController) CreateTeamGet() {
 }
 
 func (this *TeamController) CreateTeamPost() {
+	me := this.Ctx.Input.GetData("CurrentUser").(*User)
+	if me.Role <= 0 {
+		this.ServeErrJson("no privilege")
+		return
+	}
+
 	name := strings.TrimSpace(this.GetString("name", ""))
 	if name == "" {
 		this.ServeErrJson("name is blank")
@@ -78,7 +84,6 @@ func (this *TeamController) CreateTeamPost() {
 		return
 	}
 
-	me := this.Ctx.Input.GetData("CurrentUser").(*User)
 	lastId, err := SaveTeamAttrs(name, resume, me.Id)
 	if err != nil {
 		this.ServeErrJson("occur error " + err.Error())
@@ -115,6 +120,11 @@ func (this *TeamController) Users() {
 
 func (this *TeamController) DeleteTeam() {
 	me := this.Ctx.Input.GetData("CurrentUser").(*User)
+	if me.Role <= 0 {
+		this.ServeErrJson("no privilege")
+		return
+	}
+
 	targetTeam := this.Ctx.Input.GetData("TargetTeam").(*Team)
 	if !me.CanWrite(targetTeam) {
 		this.ServeErrJson("no privilege")
@@ -137,6 +147,12 @@ func (this *TeamController) EditGet() {
 }
 
 func (this *TeamController) EditPost() {
+	me := this.Ctx.Input.GetData("CurrentUser").(*User)
+	if me.Role <= 0 {
+		this.ServeErrJson("no privilege")
+		return
+	}
+
 	targetTeam := this.Ctx.Input.GetData("TargetTeam").(*Team)
 	resume := this.MustGetString("resume", "")
 	userIdstr := this.MustGetString("users", "")

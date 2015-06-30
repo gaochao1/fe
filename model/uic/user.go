@@ -98,6 +98,15 @@ func InsertRegisterUser(name, password string) (int64, error) {
 	return userPtr.Save()
 }
 
+func InsertUser(name, password string, role int) (int64, error) {
+	userPtr := &User{
+		Name:   name,
+		Passwd: password,
+		Role:   role,
+	}
+	return userPtr.Save()
+}
+
 func (this *User) Update() (int64, error) {
 	num, err := orm.NewOrm().Update(this)
 

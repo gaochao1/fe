@@ -2,7 +2,7 @@ package cache
 
 import (
 	"github.com/toolkits/cache"
-	"github.com/open-falcon/fe/g"
+	"github.com/gaochao1/fe/g"
 	"time"
 )
 

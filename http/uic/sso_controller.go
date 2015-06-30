@@ -1,9 +1,9 @@
 package uic
 
 import (
-	"github.com/open-falcon/fe/http/base"
-	"github.com/open-falcon/fe/model/uic"
-	"github.com/open-falcon/fe/utils"
+	"github.com/gaochao1/fe/http/base"
+	"github.com/gaochao1/fe/model/uic"
+	"github.com/gaochao1/fe/utils"
 )
 
 type SsoController struct {

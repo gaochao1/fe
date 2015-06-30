@@ -24,7 +24,7 @@ source .bashrc
 
 ```
 cd $GOPATH/src/github.com/open-falcon
-git clone https://github.com/open-falcon/fe.git
+git clone https://github.com/gaochao1/fe.git
 cd fe
 go get ./...
 ./control build

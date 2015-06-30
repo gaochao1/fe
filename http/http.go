@@ -2,10 +2,10 @@ package http
 
 import (
 	"github.com/astaxie/beego"
-	"github.com/open-falcon/fe/g"
-	"github.com/open-falcon/fe/http/home"
-	"github.com/open-falcon/fe/http/uic"
-	uic_model "github.com/open-falcon/fe/model/uic"
+	"github.com/gaochao1/fe/g"
+	"github.com/gaochao1/fe/http/home"
+	"github.com/gaochao1/fe/http/uic"
+	uic_model "github.com/gaochao1/fe/model/uic"
 )
 
 func Start() {

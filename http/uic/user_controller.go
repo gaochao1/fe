@@ -1,10 +1,10 @@
 package uic
 
 import (
-	"github.com/open-falcon/fe/g"
-	"github.com/open-falcon/fe/http/base"
-	. "github.com/open-falcon/fe/model/uic"
-	"github.com/open-falcon/fe/utils"
+	"github.com/gaochao1/fe/g"
+	"github.com/gaochao1/fe/http/base"
+	. "github.com/gaochao1/fe/model/uic"
+	"github.com/gaochao1/fe/utils"
 	"github.com/toolkits/rsc/qr"
 	"github.com/toolkits/str"
 	"strconv"
@@ -373,4 +373,37 @@ func (this *UserController) QrCode() {
 
 	this.Ctx.Output.ContentType("image")
 	this.Ctx.Output.Body(c.PNG())
+}
+
+func (this *UserController) CreateUserGet() {
+	this.TplNames = "user/create.html"
+}
+
+func (this *UserController) CreateUserPost() {
+	me := this.Ctx.Input.GetData("CurrentUser").(*User)
+	if me.Role <= 0 {
+		this.ServeErrJson("no privilege")
+		return
+	}
+
+	name := strings.TrimSpace(this.GetString("name", ""))
+	password := strings.TrimSpace(this.GetString("password", ""))
+	role, _ := this.GetInt("role", -1)
+
+	if !utils.IsUsernameValid(name) {
+		this.ServeErrJson("name pattern is invalid")
+		return
+	}
+
+	if ReadUserIdByName(name) > 0 {
+		this.ServeErrJson("name is already existent")
+		return
+	}
+
+	_, err := InsertUser(name, str.Md5Encode(g.Config().Salt+password), role)
+	if err != nil {
+		this.ServeErrJson("insert user fail " + err.Error())
+	} else {
+		this.ServeOKJson()
+	}
 }

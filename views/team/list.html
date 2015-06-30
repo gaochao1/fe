@@ -19,7 +19,7 @@ $(function() {
 
 				<ol class="breadcrumb">
 					<li><a href="/">首页</a></li>
-					<li class="active">用户组管理</li>
+					<li class="active">用户组</li>
 				</ol>
 
 				<div class="form-inline mb20" role="form">
@@ -32,10 +32,13 @@ $(function() {
 						Search
 					</button>
 					
+					{{if gt $.Me.Role 0}}
 					<a href="/me/team/c" class="btn btn-default pull-right">
 						<span class="glyphicon glyphicon-plus"></span>
 						Add
 					</a>
+					{{end}}
+
 				</div>
 
 				<div class="ts">
@@ -45,6 +48,8 @@ $(function() {
 							<span class="glyphicon glyphicon-align-justify" style="font-size:9px;"></span>
 							{{.Name}}
 							<span class="gray" style="margin-right:10px;">{{.Resume}}</span>
+
+							{{if gt $.Me.Role 0}}
 							<a href="/target-team/edit?id={{.Id}}" class="orange" style="text-decoration:none;">
 								<span class="glyphicon glyphicon-edit"></span>
 							</a>
@@ -52,6 +57,8 @@ $(function() {
 							<a href="javascript:delete_team('{{.Id}}');" class="orange" style="text-decoration:none;">
 								<span class="glyphicon glyphicon-trash"></span>
 							</a>
+							{{end}}
+
 						</div>
 						<div class="mt10">
 							{{range member .Id}}

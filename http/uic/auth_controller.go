@@ -1,10 +1,10 @@
 package uic
 
 import (
-	"github.com/open-falcon/fe/g"
-	"github.com/open-falcon/fe/http/base"
-	. "github.com/open-falcon/fe/model/uic"
-	"github.com/open-falcon/fe/utils"
+	"github.com/gaochao1/fe/g"
+	"github.com/gaochao1/fe/http/base"
+	. "github.com/gaochao1/fe/model/uic"
+	"github.com/gaochao1/fe/utils"
 	"github.com/toolkits/str"
 	"strings"
 	"time"
@@ -32,6 +32,7 @@ func (this *AuthController) LoginGet() {
 	}
 
 	sessionObj := ReadSessionBySig(cookieSig)
+
 	if sessionObj == nil || int64(sessionObj.Expired) < time.Now().Unix() {
 		this.renderLoginPage(appSig, callback)
 		return

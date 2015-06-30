@@ -145,6 +145,24 @@ function create_user() {
 	});
 }
 
+
+function create_user_bg() {
+	var role = $("#role").prop('checked') ? '1' : '0';
+	console.log("role is:",role,$("#password").val(),$("#role").prop('checked'))
+	$.post('/me/user/c', {
+		'name' : $("#name").val(),
+		'password' : $("#password").val(),
+		'role' : role
+	}, function(json) {
+		if (json.msg.length > 0) {
+			err_message_quietly(json.msg);
+		} else {
+			ok_message_quietly('create user successfully');
+		}
+	});
+}
+
+ 
 function edit_user(id) {
 	$.post('/target-user/edit?id='+id, {
 		'cnname' : $("#cnname").val(),
